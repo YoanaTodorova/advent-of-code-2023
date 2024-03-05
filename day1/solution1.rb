@@ -21,7 +21,8 @@ class Solution1
   end
 
   def each_input_line
-    File.foreach("input1.txt") do |line|
+    file_name = File.join(File.dirname(__FILE__), 'input1.txt')
+    File.foreach(file_name) do |line|
       yield line
     end
   end
