@@ -1,30 +1,12 @@
-class Solution1
-  def self.call
-    new().run
-  end
+require_relative 'calibration_values_summarizer.rb'
 
-  def run
-    calibration_values.reduce(:+)
-  end
-    
+class Solution1 < CalibrationValuesSummarizer
   private
+  
+  def parse_calibration_value(line)
+    numbers_in_line = line.scan(/\d/)
 
-  def calibration_values
-    Enumerator.new do |y|
-      each_input_line do |line|
-        numbers_in_line = line.scan(/\d/)
-        calibration_value = "#{numbers_in_line[0]}#{numbers_in_line[-1]}".to_i
-
-        y << calibration_value
-      end
-    end
-  end
-
-  def each_input_line
-    file_name = File.join(File.dirname(__FILE__), 'input1.txt')
-    File.foreach(file_name) do |line|
-      yield line
-    end
+    "#{numbers_in_line[0]}#{numbers_in_line[-1]}".to_i
   end
 end
 
